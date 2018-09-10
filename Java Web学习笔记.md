@@ -565,3 +565,57 @@ JSP中的meta标签可以模拟响应头
 2. 如果参数带`/`，那么是相对于类路径下的目录；
 
 注意：一般获取项目根目录，利用ServletContext的对象来获取；
+
+
+
+# Day10
+
+## 一、HttpServletResponse
+
+状态码：
+
+200表示成功、302表示重定向（需要添加Location头）、404表示资源没找到、500表示服务区错误；
+
+
+
+状态码方法：
+
+`sendError(int sc)`：发送错误码；
+
+`sendError(int sc, String msg)`	：发送错误码的同时捎带一个错误信息；
+
+`setStatus(int sc)`：发送成功的状态码，**可以用来发送302**；
+
+
+
+响应头方法：
+
+`setHeader(String name, String value)`：设置单值的响应头；
+
+
+
+Servlet的两个流：
+
+`ServletOutputStream`：用来向客户端发送字节流； 用法：`ServletOutputStream out = response.getOutputStream();`
+
+`PrintWriter`：用来向客户端发送字符流，需要设置编码； 用法：`PrintWriter writer = response.getWriter();`
+
+上面提到的两种流不能同时使用；
+
+
+
+## 二、HttpServletRequest
+
+获取常用信息：
+
+① 获取客户端IP：`request.getRemoteAddr();`； 用途：封IP;
+
+注意：在Windows7系统中，获取IP地址，可能会出现`0:0:0:0:0:0:0:1`，因为获取的是ipv6地址；
+
+② 获取哦请求方式：`request.getMethod()`，可能是POST或GET；
+
+
+
+获取HTTP请求头：
+
+`String getHeader(String name)`：用于单值头；
