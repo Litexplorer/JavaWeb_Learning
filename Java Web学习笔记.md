@@ -27,13 +27,13 @@
  （2）class选择器：：为HTML标签定义一个class名称，并使用这个名称作为选择器；
 
 	-- <div class="aaa">aaaaaa</div>
-
+	
 	在<style>标签中写上：div.aaa { ***}
 
  （3）id选择器：为HTML标签定义一个id名称，并使用这个名称作为选择器
 
 	-- <div id="aaa">aaa</div>
-
+	
 	在<style>标签中写上div#id {***}
 
 
@@ -43,12 +43,13 @@
 （1）关联选择器：设置嵌套标签的样式
 
 		-- <div><p>sdkfhskd</p></div>
-
+	
 		-- 只设置里面的p标签的样式；
-
+	
 		-- div p {****}
 
  
+
 
 （2）组合选择器
 
@@ -145,7 +146,7 @@
 #### 7. script标签的位置
 
 	由于HTML的解析是从上到下解析，因此，如果js文件中需要用到body标签中某个id，那么需要先解析id，再解析js代码；即：js代码放在id定义之后。
-
+	
 	建议：把<script>标签放在<body>标签的后面
 
 
@@ -163,9 +164,9 @@
 dom：文档对象模型
 
 	-- 文档：指的是超文本标记文档
-
+	
 	-- 对象：提供了属性和方法操作
-
+	
 	-- 模型：使用属性和方法操作超文本标记型文档
 
 即：使用dom中提供的对象里面的属性和方法，对标记型文档进行操作。
@@ -173,13 +174,13 @@ dom：文档对象模型
 **解析过程**：
 
 	根据html的层级结构，在内存中分配一个树形结构，需要把html中的每部分封装成对象，
-
+	
 	-- document对象： 整个文档
-
+	
 	-- element对象：标签对象；
-
+	
 	-- 文本对象：
-
+	
 	-- Node节点对象： 是上面所有对象的父对象，定义了很多方法；
 
 
@@ -550,7 +551,7 @@ JSP中的meta标签可以模拟响应头
 #### 6 获取类路径下的资源
 
 	使用`Class`和 `ClassLoader`可以获取类路径资源，其中`ClassLoader`较为常用；
-
+	
 	类路径对一个JavaWeb项目而言，就是`/WEB-INF/classes`和（`/WEB-INF/lib`每个jar包）；
 
 
@@ -619,3 +620,63 @@ Servlet的两个流：
 获取HTTP请求头：
 
 `String getHeader(String name)`：用于单值头；
+
+
+
+获取请求参数：
+
+`String getParameter(String name)`：获取请求参数的值（单个值）；
+
+`String getParameterValues(String name)`：获取请求参数的值（多个值）；
+
+`Map<String, String[]> getParameterMap()`：获取所有请求参数，其中，key为参数名，value为参数值；
+
+
+
+请求转发和请求包含（注意**14.请求转发和请求包含、延时请求转发.avi**这个视频）：
+
+​	有时候一个请求需要多个Servlet协作才能完成，所以需要在一个Servlet跳转到另外一个Servlet；
+
+- 一个请求跨多个Servlet，需要使用转发和包含；
+- 请求转发：由下一个Servlet完成响应体，当前的Servlet可以设置响应头（留头不留体）；
+- 请求包含：两个Servlet共同完成响应体（留头又留体）；
+
+​	~~客户端发送一个请求到AServlet，AServlet收到请求后，需要BServlet“协助”（即：一个请求需要2个到多个Servlet才能完成），这时候就需要使用请求转发和请求包含；注意：客户端由始至终只创建了一个请求，而服务器也只发送一个响应给客户端；~~
+
+`RequestDispatcher rd = request.getRequestDispatcher();`：获取转发器；
+
+`rd.forward(request, response)`：请求转发（重点）；
+
+`rd.include(request, response)`：请求包含
+
+
+
+request域：
+
+​	request中的属性是Servlet和Servlet之间在转发或包含时用来传值的；注意：① 不能跨请求传、取值，只能在一个请求范围中传和取；② 请求参数是客户端发送给服务器的，和request中的属性不同；
+
+​	Servlet中的三大域对象：request、session、application，它们都有三个方法：
+
+- `void setAttribute(String name, Object object)`：向request中设置
+- `Object getAttribute(String name)`
+- `void removeAttribute(String name)`
+
+
+
+请求转发和重定向的区别：
+
+1. 请求转发所示一个请求一次响应，而重定向是两个请求两次响应；
+2. 请求转发中的地址栏没有变化，而重定向中会1显示最后一个请求的地址；
+3. 请求转发只能转发到本项目其他的Servlet，而重定向不仅能重定向到本项目的其他Servlet，还能重定向到其他项目；
+4. 请求转发是服务器行为，只需要给出Servlet路径，而重定向需要给出requestURI（即：包含项目名称）；
+5. 请求转发的效率比重定向要高；
+
+
+
+## 三、编码与解码
+
+响应编码与解码：
+
+1. 服务器给客户端发送数据时，默认使用的是ISO编码；而浏览器一般使用GBk进行解码；
+
+![](./images/响应编码.jpg)
