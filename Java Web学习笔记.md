@@ -53,6 +53,7 @@
 
 
 
+
 （2）组合选择器
 
 （3）伪元素选择器
@@ -637,7 +638,7 @@ Servlet的两个流：
 
 请求转发和请求包含（注意**14.请求转发和请求包含、延时请求转发.avi**这个视频）：
 
-​	有时候一个请求需要多个Servlet协作才能完成，所以需要在一个Servlet跳转到另外一个Servlet；
+	有时候一个请求需要多个Servlet协作才能完成，所以需要在一个Servlet跳转到另外一个Servlet；
 
 - 一个请求跨多个Servlet，需要使用转发和包含；
 - 请求转发：由下一个Servlet完成响应体，当前的Servlet可以设置响应头（留头不留体）；
@@ -655,9 +656,9 @@ Servlet的两个流：
 
 request域：
 
-​	request中的属性是Servlet和Servlet之间在转发或包含时用来传值的；注意：① 不能跨请求传、取值，只能在一个请求范围中传和取；② 请求参数是客户端发送给服务器的，和request中的属性不同；
-
-​	Servlet中的三大域对象：request、session、application，它们都有三个方法：
+	request中的属性是Servlet和Servlet之间在转发或包含时用来传值的；注意：① 不能跨请求传、取值，只能在一个请求范围中传和取；② 请求参数是客户端发送给服务器的，和request中的属性不同；
+	
+	Servlet中的三大域对象：request、session、application，它们都有三个方法：
 
 - `void setAttribute(String name, Object object)`：向request中设置
 - `Object getAttribute(String name)`
@@ -700,11 +701,11 @@ request域：
 
 URL编码：
 
-​	表单的类型：`ContentType: application/x-www-form-urlencoded`：把中文转成`% + 两位的16进制编码`，它不是编码格式，而是在字符编码（GBk等）基础上再进行转换；
-
-​	在客户端发给服务器的	GET请求时，如果请求参数包含中文，该请求不会使用URL编码，此时，有可能出现丢失字节的现象；
-
-​	**今后，我们需要把超链接中的中文，使用URL进行编码；**
+	表单的类型：`ContentType: application/x-www-form-urlencoded`：把中文转成`% + 两位的16进制编码`，它不是编码格式，而是在字符编码（GBk等）基础上再进行转换；
+	
+	在客户端发给服务器的	GET请求时，如果请求参数包含中文，该请求不会使用URL编码，此时，有可能出现丢失字节的现象；
+	
+	**今后，我们需要把超链接中的中文，使用URL进行编码；**
 
 
 
@@ -776,4 +777,4 @@ JSP中无需创建即可使用的对象有9个，称为9大内置对象；
 
 注意：
 
-1. JSP页面中，如果有`<base href="...">`，那么在这个页面上的所有`<a href="a0">`，如果a0不以`/`开头，那么a标签的超链接都是相对于`base`的；（视频：“3.jsp中java脚本的使用”）
+1. JSP页面中，如果有`<base href="...">`，那么在这个页面上的所有`<a href="a0">`，如果a0不以`/`开头，那么a标签的超链接都是相对于`base`的；（视频：“**3.jsp中java脚本的使用**”）
