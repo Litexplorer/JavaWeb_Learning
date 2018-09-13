@@ -778,3 +778,49 @@ JSP中无需创建即可使用的对象有9个，称为9大内置对象；
 注意：
 
 1. JSP页面中，如果有`<base href="...">`，那么在这个页面上的所有`<a href="a0">`，如果a0不以`/`开头，那么a标签的超链接都是相对于`base`的；（视频：“**3.jsp中java脚本的使用**”）
+
+
+
+JSP原理：
+
+​	JSP其实是一种特殊的Servlet；① 当jsp页面被第一次访问时，服务器会把jsp文件编译成Java文件（继承了Servlet类），然后再把java文件编译成.class文件，最后创建该类对象，最后调用service方法；② 第一次请求后，如果再有请求，那么直接调用service方法即可；
+
+​	`tomcat/work`目录下可以找到某个jsp对应的java源码；
+
+ 
+
+## 二、Cookie
+
+​	Cookie是HTTP协议制定的！先由服务器保存Cookie到浏览器，等下次浏览器请求服务器时把上一次的请求得到的Cookie归还给服务器；Cookie是一个键值对（只有一个键一个值）
+
+特点：
+
+- 每一个由服务端发送到客户端的Cookie的大小是有限制的；
+- 客户端保存在本地的Cookie的总大小也是有限制的；
+- Cookie是不能跨浏览器的！
+
+
+
+Cookie用途：
+
+- 服务器用Cookie来跟踪客户端的状态；
+- 保存历史浏览记录（例如购物网站）；
+- 显示登录名；
+
+
+
+JavaWeb中使用Cookie：
+
+便捷方式：`response.addCookie()`和`request.getCookies()`；
+
+
+
+Cookie详解：
+
+Cookie的maxAge：指的是Cookie的最大生命时长，以秒为单位；
+
+- `maxAge>0`：浏览器会把Cookie保存到客户机的硬盘上，有效时长为maxAge；
+- `maxAge<0`：Cookie只在内存中存在，当用户关闭浏览器时，Cookie也被释放了；
+- `maxAge==0`：浏览器会马上删掉这个Cookie（如果客户机上存在同名Cookie，那么也会把客户端的Cookie删掉）；
+
+Cookie的path：Cookie的path是由服务器创建Cookie时设置的，当浏览器访问服务器某个路径时，需要归还的Cookie，是由path所决定的：当浏览访服务器的路径$p_0$包含Cookie的path时，就会把该Cookie带上并发给服务器；（注意：path不是值Cookie保存在客户机硬盘上的路径！）
