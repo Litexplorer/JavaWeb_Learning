@@ -57,6 +57,7 @@
 
 
 
+
 （2）组合选择器
 
 （3）伪元素选择器
@@ -881,4 +882,162 @@ HttpSession原理：
   注意：这个页面会设置状态码为500，并且还可以使用9大内置对象中的`exception`；
 
 
+
+## 二、九大内置对象
+
+- out：JSP输出流对象；
+- page：当前JSP的对象，它的类型是Object类型（即：在JSP转化为java代码时，代码中有`Object page = this;`
+- config：对应“真身”中的ServletConfig对象；
+- pageContext；
+- request；
+- response
+- exception
+- session
+- application
+
+
+
+pageContext：
+
+​	Servlet中拥有三大域，而JSP除了可以访问这三大域以外，还拥有pageContext域对象；
+
+  用途：
+
+① 域对象，域范围是当前JSP页面，利用它可以在当前JSP以及当前JSP页面中使用的标签之间共享数据；
+
+② 代理其他域，例如：`pageContext.setAttribute("xxx", "xxx",PageContext.SESSION_SCOPE) `；
+
+③ 获取其他八个内置对象；
+
+④ 全域查找：`pageContext.findAttribute("xxx");`，根据域范围，从小到大，依次查找；
+
+注意：page指的是当前JSP页面的对象，pageContext指的是page的域，是一个域对象；
+
+
+
+
+
+## 三、JSP指令
+
+**include指令（静态包含）：**
+
+​	该指令的功能与RequestDispatcher的include方法相似，但是，该指令`<%include%>`是在JSP被编译成java文件时完成的，他们共同生成一个Servlet；而RequestDispatcher的include则是一个方法，包含和被包含的是两个Servlet，他们没有被合并为一个文件，只是想“协作”关系；
+
+​	注意：被包含的页面不能使变量！例子如下：
+
+① 在a.jsp页面中有如下代码：
+
+```jsp
+........
+<%
+	String pagePath = "指向b.jsp的路径";
+%>
+<%@include file="<%=pagePath %>"%>
+........
+```
+
+② 因为`<%include%>`指令是在合并成java文件时执行的（Java文件级别进行合并），而`<%=pagePath %>`只有在运行时才能确定，因此，不能找到对应的文件进行合并；
+
+
+
+​	这个指令的作用是：可以把页面分解为几个部分，把每个页面的不变的部分提取出来，变化的部分被不变的页面include进去；
+
+
+
+
+
+**taglib标签指令**
+
+​	这个指令可以用来导入标签库，有两个属性`prefix`和`uri`。
+
+
+
+## 四、JSP动作标签
+
+​	JSP动作标签是由服务器来解释执行的，而html标签则是由浏览器来解释执行，两者有着本质的区别。
+
+标签如下：
+
+- `<jsp:forward>`：转发，与RequestDispatcher的forward方法相同；
+- `<jsp:include>`：包含；
+  注意：厘清`<%@include%>`和`<jsp:include>`有什么不同；
+- `<jsp:param>`：用来作为forward或include标签的子标签，用来传递参数
+
+
+
+JSP中和JavaBean相关的bean：
+
+- `<jsp:useBean>`：创建或查询bean，如果查询不到，即创建；
+- `<jsp:setProperty>`：设置bean的属性值；
+- `<jsp:getProperty>`：获取bean的属性值；
+
+
+
+## 五、JavaBean
+
+​	JavaBean实际上是一个Java文件，需要为该类提供get/set方法（只选其一也是可以的），同时必须要有一个默认构造器（无参构造器）；具体见下面代码：
+
+```java
+package cn.itcast.domain;
+
+public class Person {
+
+    private String username;
+    private String password;
+    private int age;
+
+    // 实际上并不需要类中拥有一个成员，只需要有一个方法即可，方法会被转换为“去掉get/set后的、首字母小写的名称  所对应的属性”
+    public String getName() {
+        return "你想要返回的字符串";
+    }
+
+	/**
+	* 为每个属性提供get/set方法
+	*/
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+}
+
+```
+
+
+
+**JavaBean规范：**
+
+1. 必须提供一个默认构造器；
+2. 为属性提供get/set方法，如果只有get方法，那么这个属性是只读的；
+3. 属性：可以对应get/set方法的成员，也可以不用对应；此外，属性的名称由`get/set方法来指定`
+
+
+
+**内省：**
+
+流程：内省类-->Bean信息-->属性描述符数组-->单个属性描述符的get/set方法-->接着可以利用反射机制来执行方法。
+
+
+
+**BeanUtils的使用：**
+
+**见“BeanUtils的使用”20:30~最后**
 
