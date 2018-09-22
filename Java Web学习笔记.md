@@ -58,6 +58,7 @@
 
 
 
+
 （2）组合选择器
 
 （3）伪元素选择器
@@ -640,7 +641,7 @@ Servlet的两个流：
 
 
 
-请求转发和请求包含（注意**14.请求转发和请求包含、延时请求转发.avi**这个视频）：
+请求转发和请求包含（注意**“14.请求转发和请求包含、延时请求转发.avi”**这个视频）：
 
 	有时候一个请求需要多个Servlet协作才能完成，所以需要在一个Servlet跳转到另外一个Servlet；
 
@@ -1040,4 +1041,46 @@ public class Person {
 **BeanUtils的使用：**
 
 **见“BeanUtils的使用”20:30~最后**
+
+
+
+## 六、EL表达式
+
+​	EL表达式是JSP内置的表达式语言（由于是表达式，因此后面不需要加分号）。JSP2.0开始，要求不能使用java脚本，而EL表达式是用来取代`<%=%>`语句的，因此EL表达式只能用作输出。
+
+
+
+EL表达式用来读取四大域：
+
+- `${xxx}`：全域查找名为xxx的属性，如果没找到，那么输出空字符串（而不是null）；
+- 用指定域中查找属性：`${pageScope.xxx}`；（注意：后面的“Scope”不能丢）
+- 
+
+
+
+JavaBean导航：
+
+​	假设有一个bean为`Employee`，而`Employee`中含有属性`Address`，`Address`中含有属性`street`，那么，当把`Employee`对象设置到某个域中（例如request域中），此时，可以利用EL表达式来获取`street`的值；语法如下：
+
+`requestScope.emp.address.street`。
+
+
+
+EL内置对象：
+
+- 前面四个为`pageScope、requestScope、sessionScope、applicationScope`；
+- `param`：对应参数，是一个`Map<String, String>`，适用于单值属性；
+- `paramValues`：对应参数，是一个`Map<String, String[]>`，适用于多值属性；
+- `header`和`headerValues`：对应请求头，内容和`param`、`paramValues`相似；
+- `initParam`：获取`<context-param>`定义的参数；
+- `cookie`：是`Map<String, Cookie>`类型，根据键得到的值是`Cookie`类型，因此，还需要调用相关方法`getName()`、`getValue()`才能得到对应的名称或值；
+- `pageContext`：对应`PageContext`对象；
+
+
+
+自定义函数库：
+
+- 写一个java类，类中可以定义0~N个方法，每个方法必须是`static` 并且有返回值；
+- 在`WEB-INF`m目录下创建一个tld文件，并参考`jstl.jar`中的模板，编写tld文件；
+- 最后，在JSP页面中导入标签，并使用标签；
 
