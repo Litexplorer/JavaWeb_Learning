@@ -59,6 +59,7 @@
 
 
 
+
 （2）组合选择器
 
 （3）伪元素选择器
@@ -1083,4 +1084,42 @@ EL内置对象：
 - 写一个java类，类中可以定义0~N个方法，每个方法必须是`static` 并且有返回值；
 - 在`WEB-INF`m目录下创建一个tld文件，并参考`jstl.jar`中的模板，编写tld文件；
 - 最后，在JSP页面中导入标签，并使用标签；
+
+
+
+
+
+# Day 13
+
+## 一、JSTL的概述
+
+​	JSTL是apache对EL表达式的扩展，使用JSTL标签需要导入`jstl.jar`；
+
+
+
+四大库：
+
+- core：核心库；
+- fmt：格式化库，常用的格式化需求有数字、日期；
+- sql：
+- xml：
+
+
+
+导入标签库：
+
+- 导入jar包；
+- 在JSP页面中，使用指令`<%@ taglib prefix="前缀" uri="路径"%>`
+
+
+
+core：
+
+1. out和set:
+   - `<c:out>`：输出
+     - `value`：可以是字符串常量，也可以是EL表达式
+     - `default`：当要输出的被容为`null`时，会输出default所对应的值；
+     - `escapeXml`：默认值为true，表示将内容转义；
+
+注意：填写uri路径时，不要导入错误的uri，正确的uri为：`http:..java.sun.com/jsp/jstl/core`
 
