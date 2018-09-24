@@ -60,6 +60,7 @@
 
 
 
+
 （2）组合选择器
 
 （3）伪元素选择器
@@ -1121,5 +1122,61 @@ core：
      - `default`：当要输出的被容为`null`时，会输出default所对应的值；
      - `escapeXml`：默认值为true，表示将内容转义；
 
+   - `<c:set>`：设置（创建）域的属性
+
+     `var`-->变量名， `value`-->变量值， `scope`-->域，默认为page；
+
+2. remove：
+   删除域变量，其中`var`表示变量名，`scope`表示待删除的域，如果没有指定`scope`对象，那么默认删除所有域中的变量名；
+
+3. url
+   url标签可以指定路径，同时，也可以为路径追加请求参数，用法如下：
+
+   - `<c:url value="/index.jsp" />`：生成的最终路径为`/项目名称/index.jsp`;
+
+   - ```jsp
+     <c:url>
+         <c:param name="username" value="张三" />
+         ...
+     </c:url>
+     最终生成的路径为：/项目名称/index.jsp?username=%XX%XX...(即自动进行url编码)
+     ```
+
+   `var`：指定变量名，当设置了这个属性时，url标签就不会输出到页面上，而是把url保存到域中，其中`scope`指定域。
+
+4. `if`标签和`choose`标签：
+   `if`对应java中的if语句，`choose`对应java中的if...else if ... else if ... ... else...语句。
+
+5. ==forEach标签：==
+   该标签可以用来遍历数组、集合，同时，还可以用来进行计数方式的循环；
+
+   - `var` ：循环变量，对应java中for语句的`int i`；
+   - `begin`：设置循环变量的起始值；
+   - `end`：设置循环变量的终止值（包含终止值）；
+   - `step`：设置步长；
+
+   上面的是计数方式的循环；下面介绍遍历数组和集合：
+
+   - `items`：指定要循环的数组或集合；**注意：EL表达式后、双引号前不能有空格！（`items="${requestScope.xxx }"`）**
+   - `var`：把数组或集合中的每个元素赋值给该变量；
+
+   此外，还可以使用`varStatus`来创建循环状态变量，用法如下：
+
+   - `count`：循环元素的个数；
+   - `index`：循环元素的下标；
+   - `first`：是否为第一个元素；
+   - `last`：是否为最后一个元素；
+   - `current`：当前元素；
+
 注意：填写uri路径时，不要导入错误的uri，正确的uri为：`http:..java.sun.com/jsp/jstl/core`
+
+
+
+fmt库：
+
+​	fmt库是一个格式化库。
+
+1. `<fmt:formatDate value="" pattern="" />`：用来输出一个由`value`指定的Date类型、`pattern`指定的格式的字符串；
+2. `<fmt:formatNumber value="" pattern="0.00"/>`：根据`pattern`输出保留指定位数的数字字符串（例子中是保留小数点后两位，如果小数点后面不足两位，那么补位，会四舍五入）；
+3. `<fmt:formatNumber value="" pattern="#.##"/>`：根据`pattern`输出保留指定位数的数字字符串（例子中是保留小数点后两位，如果小数点后面不足两位，那么不补位，会四舍五入）；
 
