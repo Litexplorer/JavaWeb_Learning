@@ -61,6 +61,7 @@
 
 
 
+
 （2）组合选择器
 
 （3）伪元素选择器
@@ -1098,7 +1099,7 @@ EL内置对象：
 
 
 
-四大库：
+**四大库：**
 
 - core：核心库；
 - fmt：格式化库，常用的格式化需求有数字、日期；
@@ -1107,14 +1108,14 @@ EL内置对象：
 
 
 
-导入标签库：
+**导入标签库：**
 
 - 导入jar包；
 - 在JSP页面中，使用指令`<%@ taglib prefix="前缀" uri="路径"%>`
 
 
 
-core：
+**core：**
 
 1. out和set:
    - `<c:out>`：输出
@@ -1172,7 +1173,7 @@ core：
 
 
 
-fmt库：
+**fmt库：**
 
 ​	fmt库是一个格式化库。
 
@@ -1180,3 +1181,101 @@ fmt库：
 2. `<fmt:formatNumber value="" pattern="0.00"/>`：根据`pattern`输出保留指定位数的数字字符串（例子中是保留小数点后两位，如果小数点后面不足两位，那么补位，会四舍五入）；
 3. `<fmt:formatNumber value="" pattern="#.##"/>`：根据`pattern`输出保留指定位数的数字字符串（例子中是保留小数点后两位，如果小数点后面不足两位，那么不补位，会四舍五入）；
 
+
+
+## 二、自定义标签
+
+
+
+### 步骤：
+
+1. 编写自定义标签类；
+2. 编写tld文件，将自定义标签类中的方法定义在tld文件中；
+3. 在JSP页面中引入tld文件：`<%@ taglib%>`；
+
+
+
+### 标签处理类（没有在idea中运行起来）
+
+`SimpleTag`接口：
+
+- `void doTag()`：每次执行标签时都会调用这个方法；
+- `JspTag getParent()`：获取父标签；（非生命周期方法）
+- `void setParent(JspTag)`：设置父标签；
+- `void setJspBody(JspFragment)`：设置标签体；
+- `void setJspContext(JspContext)`：设置JSP上下文；
+
+其中，`doTag()`方法在后三个方法执行后再被tomcat调用；
+
+
+
+`SimpleTagSupport`类：
+
+​	该类继承了`SimpleTag`接口，同时封装了若干个成员，以及成员的get/set方法；
+
+
+
+### 标签体内容
+
+- `empty`：无标签体；
+- `JSP`：表示标签体的内容可以是Java脚本、标签、也可以是EL表达式，但是在JSP2.0以后已经不再支持这个类型了；
+- `scriptless`：只能是EL表达式，也可以是其他标签（这时就出现了“父标签”的概念）；
+
+用法如下：
+
+```java
+package cn.itcast.tag;
+
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.tagext.SimpleTagSupport;
+import java.io.IOException;
+import java.io.Writer;
+
+public class MyTag3 extends SimpleTagSupport {
+    @Override
+    public void doTag() throws JspException, IOException {
+        // ① 执行某一些动作
+        
+        // ② 再输出标签体
+        // 先获取流对象
+        Writer out = getJspContext().getOut();
+        getJspBody().invoke(out);
+        
+        // ③ 再执行某些动作
+        
+    }
+}
+
+```
+
+
+
+另：可以实现一种标签，这种标签后面的内容将完全忽略，实现方法如下：① 实现`SimpleTagSupport`类，并重载`doTag()`方法； ② 在`doTag()`方法中，抛出异常`throw new SkipPageException()`；	这个`SkipPageException`会忽略该标签后的所有内容，但是Tomcat会捕捉到它，并处理掉异常，因此，不会影响其他页面。
+
+​	<u>具体分析见“**11.自定义标签之SkipPageException，不再执行标签下面的内容.avi**”</u>。可以参考其方法来分析源码。
+
+
+
+
+
+### 标签属性
+
+​	可以为标签添加属性，例如`<c:if test=""/>`中的`test..`就是属性；
+
+步骤：
+
+1. 给标签处理类添加属性
+   注意：属性至少需要一个`set`方法，`set`方法会在`doTag`方法之前被Tomcat调用，因此可以直接使用属性；
+
+2. 在tld文件中对属性进行配置：
+
+   ```xml
+   在<tag>中写上：
+       <attribute>
+       	<name></name>  指定属性名称
+           <required></required>	指定是否为必需的
+           <rtexprvalue></rtexprvalue>	指定是否能使用EL表达式
+       </attribute>
+   ```
+
+   
