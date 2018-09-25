@@ -62,6 +62,7 @@
 
 
 
+
 （2）组合选择器
 
 （3）伪元素选择器
@@ -1278,4 +1279,21 @@ public class MyTag3 extends SimpleTagSupport {
        </attribute>
    ```
 
-   
+
+## 三、MVC设计模式和JavaWeb三层架构
+
+​	MVC设计模式是独立于语言的，不是Java所独有的；而JavaWeb三层架构则是JavaWeb所独有的。
+
+
+
+### JavaWeb三层架构：
+
+- Web层；与Web相关的内容（Servlet， JSP， Servlet相关的API）；有时候，B/S架构和C/S架构可以重用业务层和数据层，而Web层则是B/S所独有的；
+- 业务层；（可以理解为将数据的零散操作聚集为一个功能集合
+- 数据层；（可以理解为数据的一些零散操作）；所有对数据库的操作，不能跳出到DAO之外；
+
+
+
+
+
+# Day 14
