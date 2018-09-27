@@ -1297,6 +1297,48 @@ public class MyTag3 extends SimpleTagSupport {
 
 
 
-# Day 14
+# Day 14 编码实战：登陆、注册功能
+
+## 一、需求分析
+
+注册+登陆
+
+
+
+## 二、框架分析
+
+### 1. 前端页面（JSP）
+
+注册页面：regist.jsp；
+
+登录页面：login.jsp；
+
+
+
+### 2. Servlet
+
+处理注册的Servlet：RegisterServlet；
+
+处理登录的Servlet：LoginServlet；
+
+
+
+### 3. Service层
+
+定义一个UserService，作为本项目中唯一的service；UserService中需要定义两个方法：注册`regist()`和登录`login()`，这两个方法对应两个业务。
+
+
+
+### 4. dao层
+
+使用xml作为数据库保存数据；该xml保存在项目中。
+
+
+
+### 5. 实体类domain
+
+定义实体类User，作为
+
+
 
 dao层直接copy其代码即可；
