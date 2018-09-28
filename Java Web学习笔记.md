@@ -64,6 +64,7 @@
 
 
 
+
 （2）组合选择器
 
 （3）伪元素选择器
@@ -1337,7 +1338,9 @@ public class MyTag3 extends SimpleTagSupport {
 
 ### 5. 实体类domain
 
-定义实体类User，作为
+定义实体类User，作为传递数据、保存数据的载体。
+
+注意：User需要适配数据库中的数据，也需要适配表单中的数据；
 
 
 
