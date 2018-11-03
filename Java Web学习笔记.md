@@ -69,6 +69,7 @@
 
 
 
+
 （2）组合选择器
 
 （3）伪元素选择器
@@ -846,7 +847,7 @@ Cookie的path：Cookie的path是由服务器创建Cookie时设置的，当浏览
 
 概述：
 
-- HttpSession是由JavaWeb提供的（不是由Http协议本身所定义的），用来绘画跟踪的类。`session`是服务端对象，保存在服务端。（而Cookie和Http协议相关的，而且保存在客户机上）
+- HttpSession是由JavaWeb提供的（不是由Http协议本身所定义的），用来会话跟踪的类。`session`是服务端对象，保存在服务端。（而Cookie和Http协议相关的，而且保存在客户机上）
 
 
 
