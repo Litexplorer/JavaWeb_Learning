@@ -1,10 +1,30 @@
-## Day04：
+[TOC]
+
+
+
+# Day04：
 
 ### 1、HTML和CSS结合的方式
 
- （1）每个HTML标签里都有一个属性 style属性，在该属性中设置样式
+ （1）每个HTML标签里都有一个属性 style属性，在该属性中设置样式：
+
+```php+HTML
+<p style="color:#333;font-size:18px">
+    XXX
+</p>
+```
+
+
 
  （2）在<head>头声明中添加；
+
+```php+HTML
+<head>
+    <style>在这里写上样式</style>
+</head>
+```
+
+
 
  （3）在<head>头声明中引入外部CSS文件；<u>注意：在某些浏览器中，该引入方式不起作用</u>
 
@@ -49,6 +69,9 @@
 		-- div p {****}
 
  
+
+
+
 
 
 
@@ -713,7 +736,7 @@ request域：
 
 注意：GET请求设置编码需要到tomcat目录下的`/config/server.xml`中进行设置（但是最好不要用）；而POST直接调用`setCharacterEncoding("utf-8")`即可；
 
-![修改Tomcat的server.xml文件](./images/GET请求编码.bmp)
+![修改Tomcat的server.xml文件](./images/GET请求编码.jpg)
 
 URL编码：
 
