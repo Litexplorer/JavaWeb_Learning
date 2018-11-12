@@ -1,4 +1,5 @@
-#目录
+<a name="catalog">目录</a>
+
 [TOC]
 
 
@@ -171,7 +172,7 @@
 
 **js是否存在重载？？？**
 
-[跳转到目录](#目录)
+[跳转到目录](#catalog)
 
 # Day 03
 
@@ -199,7 +200,7 @@ dom：文档对象模型
 	
 	-- Node节点对象： 是上面所有对象的父对象，定义了很多方法；
 
-[跳转到目录](#目录)
+[跳转到目录](#catalog)
 
 
 
@@ -224,7 +225,7 @@ dom：文档对象模型
 
 需求：在第一个p1标签末尾添加一个元素<sex></sex>
 
-[跳转到目录](#目录)
+[跳转到目录](#catalog)
 
 
 
@@ -408,7 +409,7 @@ var A = document.getElementById(id名称);
 
 注意：Day07中的jdk5.0新特性没有看；
 
-[跳转到目录](#目录)
+[跳转到目录](#catalog)
 
 
 
@@ -481,7 +482,7 @@ Tomcat会把jsp（动态资源）转换成静态资源（HTML），这时，浏�
 
 JSP中的meta标签可以模拟响应头
 
-[跳转到目录](#目录)
+[跳转到目录](#catalog)
 
 
 
@@ -591,7 +592,7 @@ JSP中的meta标签可以模拟响应头
 
 注意：一般获取项目根目录，利用ServletContext的对象来获取；
 
-[跳转到目录](#目录)
+[跳转到目录](#catalog)
 
 
 
@@ -697,7 +698,7 @@ request域：
 4. 请求转发是服务器行为，只需要给出Servlet路径，而重定向需要给出requestURI（即：包含项目名称）；
 5. 请求转发的效率比重定向要高；
 
-[跳转到目录](#目录)
+[跳转到目录](#catalog)
 
 
 
@@ -732,7 +733,7 @@ URL编码：
 	
 	**今后，我们需要把超链接中的中文，使用URL进行编码；**
 
-[跳转到目录](#目录)
+[跳转到目录](#catalog)
 
 
 
@@ -755,7 +756,7 @@ URL编码：
   - 以`/`开头，相对于`WEB-INF/classes`目录;
   - 不以`/`开头，相对于当前类字节码`.class`所在的目录（即，需要带上当前类的包名）；
 
-[跳转到目录](#目录)
+[跳转到目录](#catalog)
 
 
 
@@ -816,7 +817,7 @@ JSP原理：
 
 ​	`tomcat/work`目录下可以找到某个jsp对应的java源码；
 
-[跳转到目录](#目录)
+[跳转到目录](#catalog)
 
  
 
@@ -856,7 +857,7 @@ Cookie的maxAge：指的是Cookie的最大生命时长，以秒为单位；
 
 Cookie的path：Cookie的path是由服务器创建Cookie时设置的，当浏览器访问服务器某个路径时，需要归还的Cookie，是由path所决定的：当浏览访服务器的路径$p_0$包含Cookie的path时，就会把该Cookie带上并发给服务器；（注意：path不是值Cookie保存在客户机硬盘上的路径！）
 
-[跳转到目录](#目录)
+[跳转到目录](#catalog)
 
 
 
@@ -890,7 +891,7 @@ HttpSession原理：
 
 注意：如果浏览器直接访问`servlet`那么需要调用方法`request.getSession()`如果浏览器访问了`jsp`页面，那么默认就调用了`request.getSession()`;
 
-[跳转到目录](#目录)
+[跳转到目录](#catalog)
 
 
 
@@ -912,7 +913,7 @@ HttpSession原理：
 - `isErrorPage`：指定当前页面是否为处理错误的页面，如果值为`true`，那么当从别的页面跳转到当前页面（即错误页面）时，状态码为500；
   注意：这个页面会设置状态码为500，并且还可以使用9大内置对象中的`exception`；
 
-[跳转到目录](#目录)
+[跳转到目录](#catalog)
 
 
 
@@ -946,7 +947,7 @@ pageContext：
 
 注意：page指的是当前JSP页面的对象，pageContext指的是page的域，是一个域对象；
 
-[跳转到目录](#目录)
+[跳转到目录](#catalog)
 
 
 
@@ -985,7 +986,7 @@ pageContext：
 
 ​	这个指令可以用来导入标签库，有两个属性`prefix`和`uri`。
 
-[跳转到目录](#目录)
+[跳转到目录](#catalog)
 
 
 
@@ -1008,7 +1009,7 @@ JSP中和JavaBean相关的bean：
 - `<jsp:setProperty>`：设置bean的属性值；
 - `<jsp:getProperty>`：获取bean的属性值；
 
-[跳转到目录](#目录)
+[跳转到目录](#catalog)
 
 
 
@@ -1080,7 +1081,7 @@ public class Person {
 
 **见“BeanUtils的使用”20:30~最后**
 
-[跳转到目录](#目录)
+[跳转到目录](#catalog)
 
 
 
@@ -1124,7 +1125,7 @@ EL内置对象：
 - 在`WEB-INF`m目录下创建一个tld文件，并参考`jstl.jar`中的模板，编写tld文件；
 - 最后，在JSP页面中导入标签，并使用标签；
 
-[跳转到目录](#目录)
+[跳转到目录](#catalog)
 
 
 
@@ -1220,7 +1221,7 @@ EL内置对象：
 2. `<fmt:formatNumber value="" pattern="0.00"/>`：根据`pattern`输出保留指定位数的数字字符串（例子中是保留小数点后两位，如果小数点后面不足两位，那么补位，会四舍五入）；
 3. `<fmt:formatNumber value="" pattern="#.##"/>`：根据`pattern`输出保留指定位数的数字字符串（例子中是保留小数点后两位，如果小数点后面不足两位，那么不补位，会四舍五入）；
 
-[跳转到目录](#目录)
+[跳转到目录](#catalog)
 
 
 
@@ -1319,7 +1320,7 @@ public class MyTag3 extends SimpleTagSupport {
        </attribute>
    ```
 
-[跳转到目录](#目录)
+[跳转到目录](#catalog)
 
 
 
@@ -1335,7 +1336,7 @@ public class MyTag3 extends SimpleTagSupport {
 - 业务层；（可以理解为将数据的零散操作聚集为一个功能集合
 - 数据层；（可以理解为数据的一些零散操作）；所有对数据库的操作，不能跳出到DAO之外；
 
-[跳转到目录](#目录)
+[跳转到目录](#catalog)
 
 
 
